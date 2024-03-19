@@ -12,21 +12,21 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/zhashkevych/go-clean-architecture/auth"
-	"github.com/zhashkevych/go-clean-architecture/bookmark"
+	"github.com/kneumoin/go-clean-architecture/auth"
+	"github.com/kneumoin/go-clean-architecture/link"
 
-	authhttp "github.com/zhashkevych/go-clean-architecture/auth/delivery/http"
-	authmongo "github.com/zhashkevych/go-clean-architecture/auth/repository/mongo"
-	authusecase "github.com/zhashkevych/go-clean-architecture/auth/usecase"
-	bmhttp "github.com/zhashkevych/go-clean-architecture/bookmark/delivery/http"
-	bmmongo "github.com/zhashkevych/go-clean-architecture/bookmark/repository/mongo"
-	bmusecase "github.com/zhashkevych/go-clean-architecture/bookmark/usecase"
+	authhttp "github.com/kneumoin/go-clean-architecture/auth/delivery/http"
+	authmongo "github.com/kneumoin/go-clean-architecture/auth/repository/mongo"
+	authusecase "github.com/kneumoin/go-clean-architecture/auth/usecase"
+	bmhttp "github.com/kneumoin/go-clean-architecture/link/delivery/http"
+	bmmongo "github.com/kneumoin/go-clean-architecture/link/repository/mongo"
+	bmusecase "github.com/kneumoin/go-clean-architecture/link/usecase"
 )
 
 type App struct {
 	httpServer *http.Server
 
-	bookmarkUC bookmark.UseCase
+	linkUC link.UseCase
 	authUC     auth.UseCase
 }
 
@@ -34,10 +34,10 @@ func NewApp() *App {
 	db := initDB()
 
 	userRepo := authmongo.NewUserRepository(db, viper.GetString("mongo.user_collection"))
-	bookmarkRepo := bmmongo.NewBookmarkRepository(db, viper.GetString("mongo.bookmark_collection"))
+	linkRepo := bmmongo.NewLinkRepository(db, viper.GetString("mongo.link_collection"))
 
 	return &App{
-		bookmarkUC: bmusecase.NewBookmarkUseCase(bookmarkRepo),
+		linkUC: bmusecase.NewLinkUseCase(linkRepo),
 		authUC: authusecase.NewAuthUseCase(
 			userRepo,
 			viper.GetString("auth.hash_salt"),
@@ -63,7 +63,7 @@ func (a *App) Run(port string) error {
 	authMiddleware := authhttp.NewAuthMiddleware(a.authUC)
 	api := router.Group("/api", authMiddleware)
 
-	bmhttp.RegisterHTTPEndpoints(api, a.bookmarkUC)
+	bmhttp.RegisterHTTPEndpoints(api, a.linkUC)
 
 	// HTTP Server
 	a.httpServer = &http.Server{

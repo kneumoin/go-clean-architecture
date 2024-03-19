@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/spf13/viper"
-	"github.com/zhashkevych/go-clean-architecture/config"
-	"github.com/zhashkevych/go-clean-architecture/server"
+	"github.com/kneumoin/go-clean-architecture/config"
+	"github.com/kneumoin/go-clean-architecture/server"
 	"log"
 )
 

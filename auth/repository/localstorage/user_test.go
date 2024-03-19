@@ -3,8 +3,8 @@ package localstorage
 import (
 	"context"
 	"github.com/stretchr/testify/assert"
-	"github.com/zhashkevych/go-clean-architecture/auth"
-	"github.com/zhashkevych/go-clean-architecture/models"
+	"github.com/kneumoin/go-clean-architecture/auth"
+	"github.com/kneumoin/go-clean-architecture/models"
 	"testing"
 )
 

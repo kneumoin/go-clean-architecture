@@ -3,8 +3,8 @@ package usecase
 import (
 	"context"
 	"github.com/stretchr/testify/assert"
-	"github.com/zhashkevych/go-clean-architecture/auth/repository/mock"
-	"github.com/zhashkevych/go-clean-architecture/models"
+	"github.com/kneumoin/go-clean-architecture/auth/repository/mock"
+	"github.com/kneumoin/go-clean-architecture/models"
 	"testing"
 )
 

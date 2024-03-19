@@ -3,7 +3,7 @@ package mock
 import (
 	"context"
 	"github.com/stretchr/testify/mock"
-	"github.com/zhashkevych/go-clean-architecture/models"
+	"github.com/kneumoin/go-clean-architecture/models"
 )
 
 type UserStorageMock struct {

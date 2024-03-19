@@ -2,7 +2,7 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/zhashkevych/go-clean-architecture/auth"
+	"github.com/kneumoin/go-clean-architecture/auth"
 	"net/http"
 	"strings"
 )
